@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MVC的基础是观察者模式</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<h3>在Controller中完成业务逻辑并对Model进行修改，Model的变化触发View的自动更新</h3>
+	<p>controller中只负责更新model的逻辑，和view完全解耦；而view和model的绑定是通过view中的属性和框架中controller的初始化代码完成的，也没有出现在业务逻辑中；至于view的更新，也是通过框架中的观察者模式实现的。</p>
+	<span bind="hour"></span> : 
+	<span bind="minute"></span> : 
+	<span bind="second"></span>
+	<script type="text/javascript" src="index.js"></script>
+	<script type="text/javascript">
+		new Controller(function (models) {
+		    function setTime() {
+		        var date = new Date()
+		        models.hour.set(date.getHours())
+		        models.minute.set(date.getMinutes())
+		        models.second.set(date.getSeconds())
+		    }
+		    setTime()
+		    setInterval(setTime, 1000)
+		})
+	</script>
+</body>
+</html>
